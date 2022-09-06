@@ -10,7 +10,7 @@ div.container {
 
 div#calculator {
   width: 400px;
-  height: 500px;
+  height: 550px;
   border: 2px solid black;
   border-radius: 10px;
   background-color: grey;
@@ -33,4 +33,23 @@ div#display h3 {
   font-family: 'Unica One', cursive;
   font-size: 40px;
   margin-right: 10px;
+}
+
+div#control-panel {
+  display: grid;
+  gap: 1px;
+  height: 350px;
+  width: 350px;
+  margin-left: 25px;
+  margin-top: 30px;
+  grid-template: 
+  'clear delete power divide'
+  'seven eigth nine multiply'
+  'four five six minus'
+  'one two three plus'
+  'zero decimal equal plus';
+}
+
+#control-panel button {
+  font-size: 20px;
 }
