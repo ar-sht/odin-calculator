@@ -1,0 +1,36 @@
+h1 {
+  text-align: center;
+}
+
+div.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div#calculator {
+  width: 400px;
+  height: 500px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: grey;
+}
+
+div#display {
+  background-color: lightgrey;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 350px;
+  height: 100px;
+  margin-top: 25px;
+  margin-left: 25px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+div#display h3 {
+  font-family: 'Unica One', cursive;
+  font-size: 40px;
+  margin-right: 10px;
+}
