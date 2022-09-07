@@ -51,13 +51,17 @@ function updateDisplay(value) {
   if (value.classList.contains('number')) {
     toMain += value.textContent;
   } else if (value.classList.contains('operation')) {
-    toSub += mainDisplay.textContent + ' ' + value.textContent + ' ';
+    toSub += mainDisplay.textContent + value.textContent;
     toMain = '';
   } else if (value.classList.contains('power')) {
     toSub += mainDisplay.textContent + '^';
     toMain = '';
   } else if (value.classList.contains('equals')) {
-    toSub += mainDisplay.textContent + ' = '
+    let extra = '';
+    if (mainDisplay.textContent === '') {
+      extra = '0'
+    }
+    toSub += mainDisplay.textContent + extra + '='
     toMain = operate(op, num1, num2);
   } else if (value.classList.contains('clear')) {
     toMain = '';
@@ -93,23 +97,33 @@ buttons.forEach(function (button) {
         updateDisplay(button);
         buttons.forEach(function (button) {
           if (!button.classList.contains('clear')) {
-            button.toggleAttribute('disabled')
+            button.setAttribute('disabled', 'true')
           }
         })
+      } else {
+        mainDisplay.textContent = "YER DUM.";
+        subDisplay.textContent = "HEY!"
       }
     })
   } else if (button.classList.contains('clear')) {
     button.addEventListener('click', function () {
       updateDisplay(button);
       buttons.forEach(function (button) {
-        if (!button.classList.contains('clear')) {
-          button.toggleAttribute('disabled')
-        }
+        button.removeAttribute('disabled')
       })
     })
   } else if (button.classList.contains('delete')) {
     button.addEventListener('click', function () {
       updateDisplay(button);
+    })
+  } else if (button.classList.contains('decimal')) {
+    button.addEventListener('click', function () {
+      updateDisplay(button);
+      button.toggleAttribute('disabled')
+    })
+  } else if (button.classList.contains('astley')) {
+    button.addEventListener('click', function () {
+      document.body.innerHTML = "<video autoplay src=\"inconspicous-file.mp4\" style=\"width:100%;\">"
     })
   }
 })

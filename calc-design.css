@@ -61,6 +61,53 @@ div.control-panel {
   'zero decimal equal plus';
 }
 
-#control-panel button {
+button {
+  border: none;
+  border-radius: 5px;
   font-size: 20px;
+  font-family: 'Times New Roman', sans-serif;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button.number, 
+button.decimal {
+  background-color: aliceblue;
+}
+
+button.number:hover,
+button.decimal:hover {
+  background-color: rgb(0, 0, 0);
+  color: aliceblue;
+  transition: all 0.2s;
+}
+
+button.operation,
+button.equals,
+button.power,
+button.clear,
+button.delete {
+  background-color: antiquewhite;
+}
+
+button.operation:hover,
+button.equals:hover,
+button.power:hover,
+button.clear:hover,
+button.delete:hover {
+  background-color: black;
+  color: antiquewhite;
+  transition: all 0.2s;
+}
+
+button.astley {
+  background-image: linear-gradient(aliceblue, antiquewhite);
+}
+
+button.astley:hover {
+  background-image: linear-gradient(antiquewhite, aliceblue);
+  transform: rotate(1800deg);
+  transition: all 10s;
 }
