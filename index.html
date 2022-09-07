@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculator</title>
-  <script src="function.js" defer></script>
+  <script src="click-reactions.js" defer></script>
   <link rel="stylesheet" href="calc-design.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,32 +16,33 @@
   <div class="container">
     <div id="calculator">
       <div id="display">
-        <h3>0123456789+-*÷</h3>
+        <h5 class="display sub">90</h5>
+        <h3 class="display main">0123456789+-*÷</h3>
       </div>
-      <div id="control-panel">
-        <button class="func-row" id="clear">AC</button>
-        <button class="func-row" id="delete">DEL</button>
-        <button class="func-row" id="power">x<sup>y</sup></button>
-        <button class="func-row" id="divide">/</button>
+      <div class="control-panel">
+        <button class="button clear" id="clear">AC</button>
+        <button class="button delete" id="delete">DEL</button>
+        <button class="button power" id="power">x<sup>y</sup></button>
+        <button class="button operation" id="divide">/</button>
 
-        <button class="num-row1" id="seven">7</button>
-        <button class="num-row1" id="eight">8</button>
-        <button class="num-row1" id="nine">9</button>
-        <button class="num-row1" id="multiply">&#9747;</button>
+        <button class="button number" id="seven">7</button>
+        <button class="button number" id="eight">8</button>
+        <button class="button number" id="nine">9</button>
+        <button class="button operation" id="multiply">&#215;</button>
 
-        <button class="num-row2" id="four">4</button>
-        <button class="num-row2" id="five">5</button>
-        <button class="num-row2" id="six">6</button>
-        <button class="num-row2" id="minus">-</button>
+        <button class="button number" id="four">4</button>
+        <button class="button number" id="five">5</button>
+        <button class="button number" id="six">6</button>
+        <button class="button operation" id="minus">-</button>
 
-        <button class="num-row3" id="one">1</button>
-        <button class="num-row3" id="two">2</button>
-        <button class="num-row3" id="three">3</button>
-        <button class="num-row3" id="plus">+</button>
+        <button class="button number" id="one">1</button>
+        <button class="button number" id="two">2</button>
+        <button class="button number" id="three">3</button>
+        <button class="button operation" id="plus">+</button>
 
-        <button class="num-row4" id="zero">0</button>
-        <button class="num-row4" id="decimal">.</button>
-        <button class="num-row4" id="equals">=</button>
+        <button class="button number" id="zero">0</button>
+        <button class="button decimal" id="decimal">.</button>
+        <button class="button equals" id="equals">=</button>
       </div>
     </div>
   </div>
