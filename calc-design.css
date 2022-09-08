@@ -1,5 +1,8 @@
-h1 {
+.title {
   text-align: center;
+  font-weight: 200;
+  font-family: 'Times New Roman', serif;
+  margin: 15px;
 }
 
 div.container {
@@ -64,7 +67,7 @@ div.control-panel {
 button {
   border: none;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 25px;
   font-family: 'Times New Roman', sans-serif;
 }
 
@@ -103,11 +106,11 @@ button.delete:hover {
 }
 
 button.astley {
-  background-image: linear-gradient(aliceblue, antiquewhite);
+  background-image: linear-gradient(to right, aliceblue, antiquewhite);
 }
 
 button.astley:hover {
-  background-image: linear-gradient(antiquewhite, aliceblue);
-  transform: rotate(1800deg);
-  transition: all 10s;
+  color: rgb(182, 6, 6);
+  transform: rotate(2880deg);
+  transition: all 2s;
 }

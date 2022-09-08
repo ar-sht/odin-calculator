@@ -2,27 +2,61 @@
 const buttons = [...document.querySelectorAll('div.control-panel > button.button')];
 const mainDisplay = document.querySelector('div#display > h3.main')
 const subDisplay = document.querySelector('div#display > h5.sub')
+const goodStuff = {
+  '0': 'zero',
+  '1': 'one',
+  '2': 'two',
+  '3': 'three',
+  '4': 'four',
+  '5': 'zero',
+  '6': 'one',
+  '7': 'two',
+  '8': 'three',
+  '9': 'four',
+
+  '+': 'plus',
+  '-': 'minus',
+  '*': 'multiply',
+  '/': 'divide',
+  '^': 'power',
+  '?': 'astley',
+
+  '=': 'equals',
+
+  'Backspace': 'delete',
+  'Escape': 'clear',
+}
 
 let num1 = 0;
 let num2 = 0; 
+let total = 0;
 let op = '';
 let toMain = '';
 let toSub = '';
 
+function roundLongDecimals(answer) {
+  if (answer.toString().indexOf('.') !== -1) {
+    if (answer.toString().split('.')[1].length > 5) {
+      return answer.toFixed(5);
+    }
+  }
+  return answer;
+}
+
 function add(x, y) {
-  return x + y;
+  return roundLongDecimals(x + y);
 }
 
 function subtract(x, y) {
-  return x - y;
+  return roundLongDecimals(x - y);
 }
 
 function multiply(x, y) {
-  return x * y;
+  return roundLongDecimals(x * y);
 }
 
 function divide(x, y) {
-  return x / y;
+  return roundLongDecimals(x / y);
 }
 
 function power(x, y) {
@@ -30,7 +64,7 @@ function power(x, y) {
   for (let i = 0; i < y; i++) {
     total *= x;
   }
-  return total;
+  return roundLongDecimals(total);
 }
 
 function operate(op, x, y) {
@@ -48,28 +82,47 @@ function operate(op, x, y) {
 }
 
 function updateDisplay(value) {
-  if (value.classList.contains('number')) {
+  if (value.classList.contains('number') || value.classList.contains('decimal')) {
     toMain += value.textContent;
   } else if (value.classList.contains('operation')) {
     toSub += mainDisplay.textContent + value.textContent;
     toMain = '';
+    num1 = total;
+    num2 = 0;
+    document.querySelector('.decimal').removeAttribute('disabled');
   } else if (value.classList.contains('power')) {
     toSub += mainDisplay.textContent + '^';
     toMain = '';
+    num1 = total;
+    num2 = 0;
   } else if (value.classList.contains('equals')) {
     let extra = '';
     if (mainDisplay.textContent === '') {
-      extra = '0'
+      extra = '0';
     }
-    toSub += mainDisplay.textContent + extra + '='
-    toMain = operate(op, num1, num2);
+    toSub += mainDisplay.textContent + extra + '=';
+    toMain = total;
   } else if (value.classList.contains('clear')) {
     toMain = '';
     toSub = '';
     num1 = 0;
     num2 = 0;
+    total = '0'
     op = '';
   } else if (value.classList.contains('delete')) {
+    if (toMain.includes('.') && toMain[toMain.length - 1] !== '.') {
+      if (op === '') {
+        num1 -= parseInt(toString(num1)[toString(num1).length - 1]) / power(10, ((toMain.split('.')[1]).length))
+      } else {
+        num2 -= parseInt(toString(num2)[toString(num2).length - 1]) / power(10, ((toMain.split('.')[1]).length))
+      }
+    } else if (!toMain.includes('.') && toMain[toMain.length - 1] !== '.') {
+      if (op === '') {
+        num1 = (num1 - parseInt(toString(num1)[toString(num1).length - 1])) / 10
+      } else {
+        num2 = (num2 - parseInt(toString(num2)[toString(num2).length - 1])) / 10
+      }
+    }
     toMain = mainDisplay.textContent.slice(0, -1);
   }
   mainDisplay.textContent = toMain;
@@ -80,10 +133,22 @@ buttons.forEach(function (button) {
   if (button.classList.contains('number')) {
     button.addEventListener('click', function() {
       updateDisplay(button);
-      if (op === '') {
-        num1 = (num1 * 10) + parseInt(button.textContent);
+      if (!toMain.includes('.')) {
+        if (op === '') {
+          num1 = (num1 * 10) + parseInt(button.textContent);
+          total = num1;
+        } else {
+          num2 = (num2 * 10) + parseInt(button.textContent);
+          total = operate(op, num1, num2);
+        }
       } else {
-        num2 = (num2 * 10) + parseInt(button.textContent);
+        if (op === '') {
+          num1 += parseInt(button.textContent) / power(10, ((toMain.split('.')[1]).length))
+          total = num1;
+        } else {
+          num2 += parseInt(button.textContent) / power(10, ((toMain.split('.')[1]).length))
+          total = operate(op, num1, num2);
+        }
       }
     })
   } else if (button.classList.contains('operation') || button.classList.contains('power')) {
@@ -96,7 +161,7 @@ buttons.forEach(function (button) {
       if (op !== '' && !(op === 'divide' && num2 === 0) && !subDisplay.textContent.includes('=')) {
         updateDisplay(button);
         buttons.forEach(function (button) {
-          if (!button.classList.contains('clear')) {
+          if (!button.classList.contains('clear') && !button.classList.contains('astley')) {
             button.setAttribute('disabled', 'true')
           }
         })
